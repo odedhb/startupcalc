@@ -1,5 +1,6 @@
 package com.wheredatapp.startupcalc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     private TextView requiredUsersNextWeekView;
     private TextView expectedYearlyMultipleView;
     private TextView expectedUsersInYearView;
+    private String sharingText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,20 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                if (sharingText == null) {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Check out " + appPlayStoreLink());
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                } else {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, sharingText + "\n\n-- via " + appPlayStoreLink());
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                }
             }
         });
 
@@ -65,6 +79,10 @@ public class MainActivity extends AppCompatActivity
 
         findViews();
         setListeners(userCountSeekBar, userGrowthRateSeekBar);
+    }
+
+    private String appPlayStoreLink() {
+        return "https://play.google.com/store/apps/details?id=" + getPackageName();
     }
 
     final static int weeksInYear = 52;
