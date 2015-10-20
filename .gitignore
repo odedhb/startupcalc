@@ -25,3 +25,14 @@ proguard/
 
 # Log Files
 *.log
+
+
+*.iml
+
+.gradle
+StartupCalc/local.properties
+.DS_Store
+StartupCalc/build
+StartupCalc/.idea/
+
+StartupCalc/gradle/wrapper/gradle-wrapper.jar
