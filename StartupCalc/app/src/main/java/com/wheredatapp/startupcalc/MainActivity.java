@@ -2,9 +2,8 @@ package com.wheredatapp.startupcalc;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,18 +11,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.text.NumberFormat;
+
+/*
+User input, SeekBar 1: current active user count (e.g. 70)
+User input, SeekBar 2: target weekly growth rate (e.g. 5%)
+
+Result 1: required users for next week (e.g. 74)
+Result 2: expected yearly multiple (e.g. 12.6x)
+Result 3: expected users in a year (e.g. 12.6x70 = 882, e.g. 70 * (1.05 ^52))
+*/
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TextView expenseLabel;
-    private SeekBar expenseSeekBar;
     private TextView userCountLabel;
     private SeekBar userCountSeekBar;
     private TextView userGrowthRateLabel;
     private SeekBar userGrowthRateSeekBar;
+
+    private TextView requiredUsersNextWeekView;
+    private TextView expectedYearlyMultipleView;
+    private TextView expectedUsersInYearView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,23 +64,61 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         findViews();
+        setListeners(userCountSeekBar, userGrowthRateSeekBar);
     }
 
+    final static int weeksInYear = 52;
+
     void reCalculate() {
-        expenseLabel.setText("$" + expenseSeekBar.getProgress() + " Monthly expense");
-        userCountLabel.setText(userCountSeekBar.getProgress() + " New users a day");
-        userGrowthRateLabel.setText(userGrowthRateSeekBar.getProgress() + "% User growth rate");
+        int userCountSeekBarProgress = getProgress(userCountSeekBar);
+        int userGrowthRateSeekBarProgress = getProgress(userGrowthRateSeekBar);
+        userCountLabel.setText(userCountSeekBarProgress + " Active users / Revenue");
+        userGrowthRateLabel.setText(userGrowthRateSeekBarProgress + "% Weekly growth rate");
+
+        double growthPercentage = userGrowthRateSeekBarProgress / 100d;
+
+        int requiredUsersNextWeek = (int) (userCountSeekBarProgress * (1 + growthPercentage));
+        requiredUsersNextWeekView.setText(format(requiredUsersNextWeek));
+
+        double yearlyPercentage = Math.pow(1 + growthPercentage, weeksInYear);
+        expectedYearlyMultipleView.setText(format(yearlyPercentage) + "x");
+
+        int expectedUsersInYear = (int) (yearlyPercentage * userCountSeekBarProgress);
+        expectedUsersInYearView.setText(format(expectedUsersInYear));
+    }
+
+    private String format(Object number) {
+        NumberFormat f = NumberFormat.getNumberInstance();
+        f.setMaximumFractionDigits(1);
+        return f.format(number);
+    }
+
+    int getProgress(SeekBar seekBar) {
+        int power = getStepSize(seekBar);
+        int progress = seekBar.getProgress();
+        int result = progress * power;
+        return result;
+    }
+
+    private int getStepSize(SeekBar seekBar) {
+        switch (seekBar.getId()) {
+            case R.id.user_growth_rate_seek_bar:
+                return 1;
+            case R.id.user_count_seek_bar:
+                return 10;
+        }
+        return 1;
     }
 
     private void findViews() {
-        expenseLabel = (TextView) findViewById(R.id.expense_label);
-        expenseSeekBar = (SeekBar) findViewById(R.id.expense_seek_bar);
         userCountLabel = (TextView) findViewById(R.id.user_count_label);
         userCountSeekBar = (SeekBar) findViewById(R.id.user_count_seek_bar);
         userGrowthRateLabel = (TextView) findViewById(R.id.user_growth_rate_label);
         userGrowthRateSeekBar = (SeekBar) findViewById(R.id.user_growth_rate_seek_bar);
 
-        setListeners(expenseSeekBar, userCountSeekBar, userGrowthRateSeekBar);
+        requiredUsersNextWeekView = (TextView) findViewById(R.id.required_users_next_week);
+        expectedYearlyMultipleView = (TextView) findViewById(R.id.expected_yearly_multiple);
+        expectedUsersInYearView = (TextView) findViewById(R.id.expected_users_in_a_year);
     }
 
     private void setListeners(SeekBar... seekBars) {
@@ -124,7 +175,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -142,5 +192,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }
