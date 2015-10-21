@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.send_feedback) {
+            browse("mailto:joanna@wheredatapp.com");
             return true;
         }
 
