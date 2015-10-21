@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity
 
         int expectedUsersInYear = (int) (yearlyPercentage * userCountSeekBarProgress);
         expectedUsersInYearView.setText(format(expectedUsersInYear));
+
+        sharingText = String.format(getString(R.string.sharing_text), format(requiredUsersNextWeek), format(expectedUsersInYear));
     }
 
     private String format(Object number) {

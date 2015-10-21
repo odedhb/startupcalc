@@ -9,4 +9,5 @@
     <string name="article_source">Read Startup = Growth</string>
     <string name="code_source">GitHub code</string>
     <string name="made_by">Made by WhereDat</string>
+    <string name="sharing_text">Our goal for next week is %1$s users, that will get us to %2$s users within 1 year.</string>
 </resources>
