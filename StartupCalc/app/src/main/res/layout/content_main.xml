@@ -26,7 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Required users for next week:"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/required_users_next_week"
@@ -48,7 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Expected yearly multiple:"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/expected_yearly_multiple"
@@ -69,7 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Expected users in a year:"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/expected_users_in_a_year"
@@ -85,31 +88,35 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="16dp"
+            android:layout_margin="32dp"
             android:background="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/user_growth_rate_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Weekly growth rate" />
+            android:text="Weekly growth rate"
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/user_growth_rate_seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="20" />
+            android:max="20"
+            android:progress="5" />
 
         <TextView
             android:id="@+id/user_count_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Active users / Revenue" />
+            android:text="Active users / Revenue"
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/user_count_seek_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:progress="15" />
 
     </LinearLayout>
 </RelativeLayout>

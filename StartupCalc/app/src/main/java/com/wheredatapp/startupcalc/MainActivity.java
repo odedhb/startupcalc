@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity
 
         findViews();
         setListeners(userCountSeekBar, userGrowthRateSeekBar);
+        reCalculate();
     }
 
     private String appPlayStoreLink() {
