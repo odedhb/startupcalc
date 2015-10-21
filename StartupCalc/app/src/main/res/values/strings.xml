@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">StartupCalc</string>
+    <string name="app_tag_line">Calculate Startup Growth</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="article_source">Read Startup = Growth</string>
+    <string name="code_source">GitHub code</string>
+    <string name="made_by">Made by WhereDat</string>
 </resources>
