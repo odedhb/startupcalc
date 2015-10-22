@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.user_growth_rate_seek_bar:
                 return 1;
             case R.id.user_count_seek_bar:
-                return 10;
+                return 50;
         }
         return 1;
     }

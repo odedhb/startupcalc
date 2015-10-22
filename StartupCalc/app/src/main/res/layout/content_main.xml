@@ -108,8 +108,9 @@
         <SeekBar
             android:id="@+id/user_count_seek_bar"
             android:layout_width="match_parent"
+            android:max="200"
             android:layout_height="wrap_content"
-            android:progress="15" />
+            android:progress="50" />
 
 
         <TextView
