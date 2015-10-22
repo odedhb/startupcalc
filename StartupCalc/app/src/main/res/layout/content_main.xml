@@ -97,19 +97,6 @@
             android:layout_margin="16dp"
             android:background="@android:color/white" />
 
-        <TextView
-            android:id="@+id/user_growth_rate_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Weekly growth rate"
-            android:textSize="18sp" />
-
-        <SeekBar
-            android:id="@+id/user_growth_rate_seek_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="20"
-            android:progress="5" />
 
         <TextView
             android:id="@+id/user_count_label"
@@ -123,6 +110,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:progress="15" />
+
+
+        <TextView
+            android:id="@+id/user_growth_rate_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weekly growth rate"
+            android:textSize="18sp" />
+
+        <SeekBar
+            android:id="@+id/user_growth_rate_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="20"
+            android:progress="5" />
 
     </LinearLayout>
 </RelativeLayout>
